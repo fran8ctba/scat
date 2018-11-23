@@ -53,7 +53,7 @@ index();
 							if ($van['id_auxiliar'] == 0 || $van['id_auxiliar'] == null) {
 								echo 'Não cadastrado';
 				 			}else{
-								echo $result['nome'];	
+								echo  $result['nome'];	
 							}
 							?></td>
 							<td><?php nome($van['id_motorista']); 

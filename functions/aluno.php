@@ -44,10 +44,8 @@ function edit() {
     $id = $_GET['id'];
 
     if (isset($_POST['aluno'])) {
-
       $aluno = $_POST['aluno'];
-      $aluno['modified'] = $now->format("Y-m-d H:i:s");
-
+      
       update('alunos', $id, $aluno);
       header('location: index.php');
     } else {

@@ -51,7 +51,7 @@ index();
 						<tr>
 							<td><?php echo $aluno['nome']; ?></td>		
 							<td><?php 	
-							switch ($aluno['turno']) {
+							switch ($aluno['colegio']) {
 								case 1:
 								echo "Pedro Macedo";
 								break;

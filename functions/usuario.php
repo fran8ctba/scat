@@ -46,7 +46,6 @@ function edit() {
     if (isset($_POST['usuario'])) {
 
       $usuario = $_POST['usuario'];
-      $usuario['modified'] = $now->format("Y-m-d H:i:s");
 
       update('usuarios', $id, $usuario);
       header('location: index.php');

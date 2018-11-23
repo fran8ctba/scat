@@ -47,7 +47,7 @@ edit();
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                     <select class="form-control" required="required" name="aluno['id_auxiliar']" >
+                     <select class="form-control" required="required" name="van['id_auxiliar']" >
                       <option class="hidden" disabled>Selecione Auxiliar </option>
                       <!-- loop auxiliares -->
                       <?php if ($auxiliares) : ?>
@@ -70,7 +70,7 @@ edit();
                         </select>
                       </div>
                       <div class="form-group">
-                        <select class="form-control" required="required" name="aluno['id_motorista']" >
+                        <select class="form-control" required="required" name="van['id_motorista']" >
                           <option class="hidden" disabled>Selecione Motorista </option>
                           <!-- loop auxiliares -->
                           <?php if ($motoristas) : ?>

@@ -6,6 +6,8 @@ add();
 <?php include(HEADER_TEMPLATE); ?>
 <!-- auxiliar 1
  motorista 2  -->
+ <!-- nao funcionaaaaaaaaaaaaaaaaaaaaaaa
+  -->
  <script type="text/javascript">
   var dayGroup = new CheckBoxGroup();
   dayGroup.addToGroup("day");
@@ -53,7 +55,7 @@ add();
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                     <select class="form-control" required="required" name="aluno['id_auxiliar']" >
+                     <select class="form-control" required="required" name="van['id_auxiliar']" >
                       <option class="hidden" selected disabled>Selecione Auxiliar </option>
                       <!-- loop auxiliares -->
                       <?php if ($auxiliares) : ?>
@@ -66,7 +68,7 @@ add();
                       </select>
                     </div>
                     <div class="form-group">
-                      <select class="form-control" required="required" name="aluno['id_motorista']" >
+                      <select class="form-control" required="required" name="van['id_motorista']" >
                         <option class="hidden" selected disabled>Selecione Motorista </option>
                         <!-- loop auxiliares -->
                         <?php if ($motoristas) : ?>
