@@ -1,22 +1,17 @@
 <?php
-if($aindex == 1){
-require_once('../db/comand_db.php');
-require_once('../config.php');
-}else{
 require_once('../../db/comand_db.php');
 require_once('../../config.php');
-}
 require_once(DBAPI);
 
-$vans = null;
-$van = null;
+$rotas = null;
+$rota = null;
 
 /**
  *  Listagem de Clientes
  */
 function index() {
-	global $vans;
-	$vans = find_all('vans');
+	global $rotas;
+	//$rotas = find_all('');
 }
 
 /**
@@ -31,14 +26,14 @@ function add() {
   global $motoristas;
   $motoristas = find_aux_moto(2);
 
-  if (!empty($_POST['van'])) {
+  if (!empty($_POST['rota'])) {
 
     $today = 
     date_create('now', new DateTimeZone('America/Sao_Paulo'));
 
-    $van = $_POST['van'];
+    $rota = $_POST['rota'];
 
-    save('vans', $van);
+    save('rotas', $rota);
     header('location: index.php');
   }
 }
@@ -60,16 +55,16 @@ function edit() {
 
     $id = $_GET['id'];
 
-    if (isset($_POST['van'])) {
+    if (isset($_POST['rota'])) {
 
-      $van = $_POST['van'];
+      $rota = $_POST['rota'];
 
-      update('vans', $id, $van);
+      update('rotas', $id, $rota);
       header('location: index.php');
     } else {
 
-      global $van;
-      $van = find('vans', $id);
+      global $rota;
+      $rota = find('rotas', $id);
     } 
   } else {
     header('location: index.php');
@@ -80,8 +75,8 @@ function edit() {
  *  Visualização de um Cliente
  */
 function view($id = null) {
-  global $van;
-  $van = find('vans', $id);
+  global $rota;
+  $rota = find('rotas', $id);
 }
 
 /**
@@ -89,8 +84,8 @@ function view($id = null) {
  */
 function delete($id = null) {
 
-  global $van;
-  $van = remove('vans', $id);
+  global $rota;
+  $rota = remove('rotas', $id);
 
   header('location: index.php');
 }

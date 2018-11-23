@@ -9,7 +9,7 @@ if((!isset ($_SESSION['login']) == true) and (!isset ($_SESSION['senha']) == tru
 {
   unset($_SESSION['login']);
   unset($_SESSION['senha']);
-  header('location: http://localhost:88/scat/public/');
+  header('location: http://localhost/scat/');
 }
 $logado = $_SESSION['login'];
 ?>
@@ -18,7 +18,7 @@ $logado = $_SESSION['login'];
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>CRUD com Bootstrap</title>
+  <title>SCAT</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -35,9 +35,7 @@ $logado = $_SESSION['login'];
 
 <body>
 
-
-
-  <style>
+<style>
   span.fa.fa-chevron-down {
     float: right;
   }
@@ -91,6 +89,18 @@ $logado = $_SESSION['login'];
   <ul class="sub-menu">
    <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="<?php echo BASEURL; ?>view/usuario/cadastrar.php" >Cadastrar Usuário</a></li>
    <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="<?php echo BASEURL; ?>view/usuario" >Listar Usuários</a></li>
+ </ul>
+</div>
+
+
+ <!--  -->
+ <li class="sidebar-nav-item" >
+  <a class="btn btn-primary collapsed" style="text-align: left; " data-toggle="collapse" href="#rotas" role="button" aria-expanded="false" aria-controls="rotas"><i class="fa fa-map" style="margin-right:1em;"></i>Rotas<span class="fa fa-chevron-down" ></span></a>
+</li>
+<div class="collapse in " id="rotas" style="">
+  <ul class="sub-menu">
+   <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="<?php echo BASEURL; ?>view/rota/cadastrar.php" >Nova Rota</a></li>
+   <li class="sidebar-nav-item"><a class="js-scroll-trigger" href="<?php echo BASEURL; ?>view/rota" >Listar Rotas</a></li>
  </ul>
 </div>
 </ul>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+$aindex = 1;  
 require_once('../functions/van.php');
 index();
 ?>

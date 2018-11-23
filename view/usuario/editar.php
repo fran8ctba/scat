@@ -38,7 +38,7 @@ edit();
                       <input type="text" class="form-control" required="required" placeholder="Login *" value="<?php echo $usuario['login']; ?> " value="<?php echo $usuario['id']; ?> " name="usuario['login']" />
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" required="required" placeholder="Senha *" value="<?php echo md5($usuario['senha']); ?> " name="usuario['senha']" />
+                      <input type="password" class="form-control" required="required" placeholder="Senha *" value="<?php echo $usuario['senha']; ?> " name="usuario['senha']" />
                     </div>
                     <div class="form-group">
                       <input type="text" class="form-control" required="required" placeholder="Nome *" value="<?php echo $usuario['nome']; ?> " name="usuario['nome']" />

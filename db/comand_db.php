@@ -42,6 +42,30 @@ function find( $table = null, $id = null ) {
  return $found;
 }
 
+
+function find_aux_moto( $tipo = null ) {
+  
+  $database = open_database();
+  $found = null;
+
+  try {
+    if ($tipo) {
+      $sql = "SELECT * FROM  usuarios WHERE tipo_user = " . $tipo;
+      $result = $database->query($sql);
+      
+      if ($result->num_rows > 0) {
+        $found = $result->fetch_all(MYSQLI_ASSOC);
+      }
+    }
+  } catch (Exception $e) {
+   $_SESSION['message'] = $e->GetMessage();
+   $_SESSION['type'] = 'danger';
+ }
+
+ close_database($database);
+ return $found;
+}
+
 /**
  *  Pesquisa Todos os Registros de uma Tabela
  */
@@ -56,12 +80,10 @@ function finduser( $login = null, $senha = null ) {
 
   $database = open_database();
   $found = null;
-
-  $senha = md5($senha);
   try {
     if ($login) {
       $sql = "SELECT * FROM `usuarios` WHERE login = '$login' and senha = '$senha'";
-        
+
       $result = $database->query($sql);
       
       if ($result->num_rows > 0) {
@@ -181,29 +203,3 @@ function remove( $table = null, $id = null ) {
 }
 
 
-
-/**
- *  Pesquisa um Registro pelo ID em uma Tabela
- */
-function find_campo($campo = null, $table = nome, $id = null ) {
-  
-  $database = open_database();
-  $found = null;
-
-  try {
-    if ($id) {
-      $sql = "SELECT " . $campo . " FROM ".$table." WHERE id = " . $id;
-      $result = $database->query($sql);
-      
-      if ($result->num_rows > 0) {
-        $found = $result->fetch_assoc();
-      }      
-    }
-  } catch (Exception $e) {
-   $_SESSION['message'] = $e->GetMessage();
-   $_SESSION['type'] = 'danger';
- }
-
- close_database($database);
- return $found;
-}

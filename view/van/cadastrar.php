@@ -1,26 +1,27 @@
-
 <?php 
+$aindex = 2;
 require_once('../../functions/van.php');
 add();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
-
-<script type="text/javascript">
+<!-- auxiliar 1
+ motorista 2  -->
+ <script type="text/javascript">
   var dayGroup = new CheckBoxGroup();
   dayGroup.addToGroup("day");
   dayGroup.setControlBox("alldays");
   dayGroup.setMasterBehavior("all");
 </script>
 
-<main style="background-color:#00bcd4!important;height: 100%" >
+<main style="background-color:#fff!important;height: 100%" >
   <form action="cadastrar.php" method="post">
     <div align="center">
       <div class="register">
         <div class="row" style="width: 80%;">
           <div class="col-md-3 register-left cad-van" style="text-align: center; margin-top: 10em">
-            <i class="fas fa-user" style=" font-size: 7em;"></i>
-            <h3>Cadastro de usuário</h3>
-            <p>Insira os dados dos usuário aqui!</p>
+            <i class="fas fa-bus" style=" font-size: 7em;"></i>
+            <h3>Cadastro de vans</h3>
+            <p>Insira os dados da van aqui!</p>
             <div id="actions" class="row">
               <div class="col-md-12"> 
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -31,7 +32,7 @@ add();
           <div class="col-md-9 register-right" style="margin-top: 5em">
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dados do usuário</a>
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dados da Van</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -40,60 +41,52 @@ add();
                 <div class="row register-form">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Login *" name="van['login']" />
+                      <input type="text" class="form-control" required="required" placeholder="Placa *" name="van['placa']" />
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Senha *" name="van['senha']" />
+                      <input type="text" class="form-control" required="required" placeholder="Chassi *" name="van['chassi']" />
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Nome *" name="van['nome']" />
+                      <input type="number" class="form-control" required="required" placeholder="nº Bancos *" name="van['n_bancos']" />
                     </div>
-                    <div class="form-group">
-                      <input type="number" class="form-control" required="required" placeholder="CPF *" name="van['cpf']" />
-                    </div>
-                    
-                    
+
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="date" class="form-control" required="required" placeholder="Data de Nascimento *" name="van['dt_nascimento']" />
+                     <select class="form-control" required="required" name="aluno['id_auxiliar']" >
+                      <option class="hidden" selected disabled>Selecione Auxiliar </option>
+                      <!-- loop auxiliares -->
+                      <?php if ($auxiliares) : ?>
+                        <?php foreach ($auxiliares as $auxiliar) : ?>
+                          <option value="<?php echo $auxiliar["id"]; ?>"><?php echo $auxiliar["nome"]; ?></option>
+                        <?php endforeach; ?>
+                        <?php else : ?>
+                          <option value="0">Nenhum Auxiliar encontrado</option>                          
+                        <?php endif; ?>
+                      </select>
                     </div>
                     <div class="form-group">
-                      <input type="number" class="form-control" required="required" placeholder="Telefone *" name="van['telefone']" />
-                    </div>
-                    <div class="form-group">
-                      <div class="maxl" style="text-align: left; float: left;">
-                        <div style="width: 100%">Tipo de Usuário:</div>
-
-                        <div class="custom-control custom-radio" style="width: 45%; float: left; margin-right: 10%;">
-                          <input type="radio" class="custom-control-input" id="defaultUnchecked" name="van['tipo_user']" value="1" onclick="show1();">
-                          <label class="custom-control-label" for="defaultUnchecked">Auxiliar</label>
-                        </div>
-
-                        <div class="custom-control custom-radio" style="width: 45%; float: left; ">
-                          <input type="radio" class="custom-control-input" id="defaultChecked" name="van['tipo_user']" value="2"   onclick="show2();">
-                          <label class="custom-control-label" for="defaultChecked">Motorista</label>
-                        </div>
+                      <select class="form-control" required="required" name="aluno['id_motorista']" >
+                        <option class="hidden" selected disabled>Selecione Motorista </option>
+                        <!-- loop auxiliares -->
+                        <?php if ($motoristas) : ?>
+                          <?php foreach ($motoristas as $motorista) : ?>
+                            <option value="<?php echo $motorista["id"]; ?>"><?php echo $motorista["nome"]; ?></option>
+                          <?php endforeach; ?>
+                          <?php else : ?>
+                            <option value="0">Nenhum Motorista encontrado</option>                          
+                          <?php endif; ?>
+                        </select>
                       </div>
                     </div>
-
-                    <div class="form-group" id="motorista" style="display: none;">
-                      <input type="number" class="form-control" placeholder="Nº Carteira *" name="van['n_carteira']" />
-                    </div>
-                    <div class="form-group" id="auxiliar" style="display: none;">
-                      <input type="text" class="form-control" placeholder="Obs. *" name="van['obs']" />
-                    </div>
-
-
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
 
-  <?php include(FOOTER_TEMPLATE); ?>
+    <?php include(FOOTER_TEMPLATE); ?>

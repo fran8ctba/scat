@@ -1,5 +1,6 @@
 <?php 
-require_once('../../functions/usuario.php');
+$aindex = 2;
+require_once('../../functions/van.php');
 edit();
 ?>
 
@@ -8,14 +9,14 @@ edit();
 <?php include(HEADER_TEMPLATE); ?>
 
 <main style="background-color:#fff!important;height: 100%" >
-    <form action="editar.php?id=<?php echo $usuario['id']; ?>" method="post">
-      <div align="center">
+  <form action="editar.php?id=<?php echo $van['id']; ?>" method="post">
+    <div align="center">
       <div class="register">
         <div class="row" style="width: 80%;">
-          <div class="col-md-3 register-left cad-usuario" style="text-align: center; margin-top: 10em">
+          <div class="col-md-3 register-left cad-van" style="text-align: center; margin-top: 10em">
             <i class="fas fa-user" style=" font-size: 7em;"></i>
-            <h3>Editar usuário <?php echo $usuario['login']; ?></h3>
-            <p>Insira os dados dos usuário aqui!</p>
+            <h3>Editar van <?php echo $van['placa']; ?></h3>
+            <p>Insira os dados da van aqui!</p>
             <div id="actions" class="row">
               <div class="col-md-12"> 
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -26,7 +27,7 @@ edit();
           <div class="col-md-9 register-right" style="margin-top: 5em">
             <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dados do usuário</a>
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dados da van</a>
               </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -35,58 +36,69 @@ edit();
                 <div class="row register-form">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Login *" value="<?php echo $usuario['login']; ?> " value="<?php echo $usuario['id']; ?> " name="usuario['login']" />
+                      <input type="text" class="form-control" required="required" placeholder="Placa *" value="<?php echo $van['placa']; ?> " name="van['placa']" />
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" required="required" placeholder="Senha *" value="<?php echo md5($usuario['senha']); ?> " name="usuario['senha']" />
+                      <input type="text" class="form-control" required="required" placeholder="Chassi *" value="<?php echo $van['chassi']; ?> " name="van['chassi']" />
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Nome *" value="<?php echo $usuario['nome']; ?> " name="usuario['nome']" />
-                    </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="CPF *" value="<?php echo $usuario['cpf']; ?> " name="usuario['cpf']" />
+                      <input type="text" class="form-control" required="required" placeholder="nº Bancos *" value="<?php echo $van['n_bancos']; ?> " name="van['n_bancos']" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Data de Nascimento *" value="<?php echo $usuario['dt_nascimento']; ?> " name="usuario['dt_nascimento']" />
-                    </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" required="required" placeholder="Telefone *"  value="<?php echo $usuario['telefone']; ?> " name="usuario['telefone']" />
-                    </div>
-                    <div class="form-group">
-                      <div class="maxl" style="text-align: left; float: left;">
-                        <div style="width: 100%">Tipo de Usuário:</div>
+                     <select class="form-control" required="required" name="aluno['id_auxiliar']" >
+                      <option class="hidden" disabled>Selecione Auxiliar </option>
+                      <!-- loop auxiliares -->
+                      <?php if ($auxiliares) : ?>
+                        <?php $i = 0;?>
+                        <?php foreach ($auxiliares as $auxiliar) : ?>
 
-                        <div class="custom-control custom-radio" style="width: 45%; float: left; margin-right: 10%;">
-                          <input type="radio" class="custom-control-input" id="defaultUnchecked" name="usuario['tipo_user']" value="1"  <?php if($usuario['tipo_user'] == 1){ echo 'checked';} ?> onclick="show1();">
-                          <label class="custom-control-label" for="defaultUnchecked">Auxiliar</label>
-                        </div>
+                          <option value="<?php echo $auxiliar["id"]; ?>" 
+                            <?php 
+                            if( $auxiliar["id"] == $i ){
+                              echo 'selected';
+                            } else{
+                              $i = $i+1;
+                            }
+                            ?> ><?php echo $auxiliar["nome"]; ?></option>
 
-                        <div class="custom-control custom-radio" style="width: 45%; float: left; ">
-                          <input type="radio" class="custom-control-input" id="defaultChecked" name="usuario['tipo_user']" value="2"  <?php if($usuario['tipo_user'] == 2){ echo 'checked';} ?>  onclick="show2();">
-                          <label class="custom-control-label" for="defaultChecked">Motorista</label>
+                          <?php endforeach; ?>
+                          <?php else : ?>
+                            <option value="0">Nenhum Auxiliar encontrado</option>                          
+                          <?php endif; ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control" required="required" name="aluno['id_motorista']" >
+                          <option class="hidden" disabled>Selecione Motorista </option>
+                          <!-- loop auxiliares -->
+                          <?php if ($motoristas) : ?>
+                            <?php $i = 0;?>
+                            <?php foreach ($motoristas as $motorista) : ?>
+                              <option value="<?php echo $motorista["id"]; ?>"     
+                                <?php 
+                               if( $motorista["id"] == $i ){
+                                echo 'selected';
+                              } else{
+                                $i = $i+1;
+                              }?>
+                              ><?php echo $motorista["nome"]; ?></option>
+                            <?php endforeach; ?>
+                            <?php else : ?>
+                              <option value="0">Nenhum Motorista encontrado</option>                          
+                            <?php endif; ?>
+                          </select>
                         </div>
                       </div>
                     </div>
-
-                    <div class="form-group" id="auxiliar" style="display: <?php if($usuario['tipo_user'] == 1){ echo 'checked';}else{echo 'none';} ?>;">
-                      <input type="text" class="form-control" placeholder="Obs. *" value="<?php echo $usuario['obs']; ?> " name="usuario['obs']" />
-                    </div>
-                    <div class="form-group" id="motorista" style="display: <?php if($usuario['tipo_user'] == 2){ echo 'checked';}else{echo 'none';} ?>;">
-                      <input type="text" class="form-control" placeholder="Nº Carteira *" value="<?php echo $usuario['n_carteira']; ?> " name="usuario['n_carteira']" />
-                    </div>
-
-
                   </div>
+
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </form>
+      </form>
 
-  <?php include(FOOTER_TEMPLATE); ?>
+      <?php include(FOOTER_TEMPLATE); ?>
